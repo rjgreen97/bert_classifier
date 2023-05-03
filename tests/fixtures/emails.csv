@@ -1,0 +1,11 @@
+label,text,label_num
+ham, this is a real email, 1
+spam, this is a spam email, 2
+ham, I love real emails, 3
+spam, I hate spam emails, 4
+ham, this is a real test csv file, 5
+spam, this is a spam test csv file, 6
+ham, what if I wrote a longer sentence? hopefully it still works, 7
+spam, maybe it wont and I will need to update my truncation code, 8
+ham, time for another real email, 9
+spam, why not lets have another spam email, 10
