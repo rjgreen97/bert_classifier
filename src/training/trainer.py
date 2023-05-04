@@ -1,5 +1,5 @@
 import torch
-from torch.nn import BCELoss, MSELoss
+from torch.nn import MSELoss
 from tqdm import tqdm
 
 
