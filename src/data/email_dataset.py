@@ -1,7 +1,7 @@
 from torch.utils.data import Dataset
 from transformers import BertTokenizer
 
-from src.utils.data_preprocessing import process_csv
+from utils.data_prep import process_csv
 
 
 class EmailDataset(Dataset):

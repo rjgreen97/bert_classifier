@@ -6,7 +6,7 @@ from src.data.email_dataset import EmailDataset
 from src.data.email_dataset_splitter import EmailDatasetSplitter
 from src.training.trainer import Trainer
 from src.training.training_session_arg_parser import TrainingSessionArgParser
-from src.utils.data_preprocessing import process_csv
+from utils.data_prep import process_csv
 
 
 class TrainingSession:

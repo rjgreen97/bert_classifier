@@ -2,7 +2,7 @@
 from transformers import BertTokenizer
 
 from src.data.email_dataset import EmailDataset
-from src.utils.data_preprocessing import process_csv
+from utils.data_prep import process_csv
 
 df = process_csv("tests/fixtures/emails.csv")
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
