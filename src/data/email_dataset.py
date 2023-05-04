@@ -1,12 +1,11 @@
 from torch.utils.data import Dataset
 from transformers import BertTokenizer
-
-from src.utils.data_prep import process_csv
+import pandas as pd
 
 
 class EmailDataset(Dataset):
     def __init__(self, csv_path, max_len=512):
-        self.df = process_csv(csv_path)
+        self.df = self._process_csv(csv_path)
         self.tokenizer = BertTokenizer.from_pretrained(
             "bert-base-uncased", do_lower_case=True
         )
@@ -27,6 +26,11 @@ class EmailDataset(Dataset):
             "label": parsed_label,
         }
         return item
+
+    def _process_csv(self, csv_path) -> pd.DataFrame:
+        df = pd.read_csv(csv_path, encoding="utf-8")
+        df_proccessed = df[["label", "text"]]
+        return df_proccessed
 
     def _tokenize(self, email) -> dict:
         return self.tokenizer.encode_plus(
