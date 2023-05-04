@@ -14,6 +14,12 @@ class TrainingSessionArgParser:
             help="Filepath to the raw csv data.",
         )
         self.parser.add_argument(
+            "--model_checkpoint_path",
+            type=str,
+            default="./model.pth",
+            help="Filepath to saved model checkpoints.",
+        )
+        self.parser.add_argument(
             "--tokenizer",
             type=str,
             default="bert-base-uncased",

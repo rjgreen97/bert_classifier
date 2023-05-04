@@ -12,7 +12,6 @@ from utils.data_prep import process_csv
 class TrainingSession:
     def __init__(self, args):
         self.args = args
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def run(self):
         self.create_datasets()
@@ -39,14 +38,12 @@ class TrainingSession:
         )
 
     def create_model(self):
-        self.model = (
-            BertForSequenceClassification.from_pretrained(
-                pretrained_model_name_or_path=self.args.model_name,
-                num_labels=self.args.output_classes,
-                output_attentions=False,
-                output_hidden_states=False,
-            )
-        ).to(self.device)
+        self.model = BertForSequenceClassification.from_pretrained(
+            pretrained_model_name_or_path=self.args.model_name,
+            num_labels=self.args.output_classes,
+            output_attentions=False,
+            output_hidden_states=False,
+        )
 
     def create_optimizer(self):
         self.optimizer = torch.optim.Adam(
@@ -63,6 +60,8 @@ class TrainingSession:
             batch_size=self.args.batch_size,
             epochs=self.args.epochs,
             optimizer=self.optimizer,
+            patience=self.args.patience,
+            model_checkpoint_path=self.args.model_checkpoint_path,
         )
 
 
