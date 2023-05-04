@@ -5,9 +5,11 @@ from src.utils.data_prep import process_csv
 
 
 class EmailDataset(Dataset):
-    def __init__(self, df, tokenizer, max_len=512):
-        self.df = df
-        self.tokenizer = tokenizer
+    def __init__(self, csv_path, max_len=512):
+        self.df = process_csv(csv_path)
+        self.tokenizer = BertTokenizer.from_pretrained(
+            "bert-base-uncased", do_lower_case=True
+        )
         self.max_len = max_len
 
     def __len__(self) -> int:
@@ -39,11 +41,3 @@ class EmailDataset(Dataset):
 
     def _parse_labels(self, label) -> int:
         return 1 if label == "spam" else 0
-
-
-if __name__ == "__main__":
-    df = process_csv("data/raw_emails.csv")
-    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
-    email_dataset = EmailDataset(df, tokenizer)
-
-    print(email_dataset[0])

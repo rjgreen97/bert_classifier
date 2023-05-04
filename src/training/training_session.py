@@ -27,11 +27,8 @@ class TrainingSession:
         self.trainer.run()
 
     def create_datasets(self):
-        df = process_csv(self.args.data_path)
-        tokenizer = BertTokenizer.from_pretrained(
-            self.args.tokenizer, do_lower_case=True
-        )
-        dataset_splitter = EmailDatasetSplitter(EmailDataset(df, tokenizer))
+        full_dataset = EmailDataset(self.args.data_path)
+        dataset_splitter = EmailDatasetSplitter(full_dataset)
         self.train_dataset, self.val_dataset = dataset_splitter.random_split()
 
     def create_dataloaders(self):
