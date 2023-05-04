@@ -34,7 +34,7 @@ class TrainingSessionArgParser:
         self.parser.add_argument(
             "--output_classes",
             type=int,
-            default=2,
+            default=1,
             help="Number of output classes for the model.",
         )
         self.parser.add_argument(
@@ -46,7 +46,7 @@ class TrainingSessionArgParser:
         self.parser.add_argument(
             "--epochs",
             type=int,
-            default=10,
+            default=5,
             help="Number of full training passes over the entire dataset.",
         )
         self.parser.add_argument(

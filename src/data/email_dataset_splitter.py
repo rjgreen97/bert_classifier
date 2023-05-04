@@ -2,7 +2,7 @@ from torch.utils.data import random_split
 from transformers import BertTokenizer
 
 from src.data.email_dataset import EmailDataset
-from utils.data_prep import process_csv
+from src.utils.data_prep import process_csv
 
 
 class EmailDatasetSplitter:

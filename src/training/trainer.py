@@ -1,5 +1,5 @@
 import torch
-from torch.nn import BCELoss
+from torch.nn import BCELoss, MSELoss
 from tqdm import tqdm
 
 
@@ -23,7 +23,7 @@ class Trainer:
         self.optimizer = optimizer
         self.patience = patience
         self.model_checkpoint_path = model_checkpoint_path
-        self.criterion = BCELoss()
+        self.criterion = MSELoss()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def run(self):
@@ -46,12 +46,13 @@ class Trainer:
                 self.optimizer.zero_grad()
 
                 outputs = self.model(
-                    b_input_ids=batch_input_ids,
+                    input_ids=batch_input_ids,
                     attention_mask=batch_attention_mask,
                     labels=batch_label,
                     return_dict=True,
                 )
 
+                batch_label = batch_label.to(torch.float).unsqueeze(1)
                 loss = self.criterion(outputs.logits, batch_label)
                 loss.backward()
                 self.optimizer.step()
@@ -87,12 +88,13 @@ class Trainer:
                 batch_label = batch["label"].to(self.device)
 
                 outputs = self.model(
-                    b_input_ids=batch_input_ids,
+                    input_ids=batch_input_ids,
                     attention_mask=batch_attention_mask,
                     labels=batch_label,
                     return_dict=True,
                 )
 
+                batch_label = batch_label.to(torch.float).unsqueeze(1)
                 loss = self.criterion(outputs.logits, batch_label)
 
                 predictions = torch.round(torch.sigmoid(outputs.logits))

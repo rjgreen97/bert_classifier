@@ -1,6 +1,7 @@
 # Repo specific
 .pytest_cache
-.vscode
+.vscode/
+model.pth
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
