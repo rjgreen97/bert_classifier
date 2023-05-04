@@ -5,7 +5,7 @@ import pandas as pd
 
 class EmailDataset(Dataset):
     def __init__(self, csv_path, max_len=512):
-        self.df = self._process_csv(csv_path)
+        self.df = self._csv_to_df(csv_path)
         self.tokenizer = BertTokenizer.from_pretrained(
             "bert-base-uncased", do_lower_case=True
         )
@@ -27,7 +27,7 @@ class EmailDataset(Dataset):
         }
         return item
 
-    def _process_csv(self, csv_path) -> pd.DataFrame:
+    def _csv_to_df(self, csv_path) -> pd.DataFrame:
         df = pd.read_csv(csv_path, encoding="utf-8")
         df_proccessed = df[["label", "text"]]
         return df_proccessed
