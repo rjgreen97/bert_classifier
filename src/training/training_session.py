@@ -1,12 +1,17 @@
 import torch
 from torch.utils.data import DataLoader
-from transformers import BertForSequenceClassification, BertTokenizer
+from transformers import BertForSequenceClassification, BertTokenizer, logging
 
 from src.data.email_dataset import EmailDataset
 from src.data.email_dataset_splitter import EmailDatasetSplitter
 from src.training.trainer import Trainer
 from src.training.training_session_arg_parser import TrainingSessionArgParser
 from src.utils.data_prep import process_csv
+
+logging.set_verbosity_error()
+print(torch.cuda.get_device_name())
+print(torch.__version__)
+print(torch.version.cuda)
 
 
 class TrainingSession:
