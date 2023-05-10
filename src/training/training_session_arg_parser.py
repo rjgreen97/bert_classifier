@@ -20,24 +20,6 @@ class TrainingSessionArgParser:
             help="Filepath to saved model checkpoints.",
         )
         self.parser.add_argument(
-            "--tokenizer",
-            type=str,
-            default="bert-base-uncased",
-            help="Tokenizer to be used on datasets.",
-        )
-        self.parser.add_argument(
-            "--model_name",
-            type=str,
-            default="bert-base-uncased",
-            help="Model to be used for training.",
-        )
-        self.parser.add_argument(
-            "--output_classes",
-            type=int,
-            default=1,
-            help="Number of output classes for the model.",
-        )
-        self.parser.add_argument(
             "--batch_size",
             type=int,
             default=12,
@@ -46,7 +28,7 @@ class TrainingSessionArgParser:
         self.parser.add_argument(
             "--epochs",
             type=int,
-            default=5,
+            default=3,
             help="Number of full training passes over the entire dataset.",
         )
         self.parser.add_argument(

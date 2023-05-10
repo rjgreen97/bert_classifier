@@ -14,6 +14,8 @@ print(torch.version.cuda)
 
 
 class TrainingSession:
+    MODEL_NAME = "bert-base-uncased"
+
     def __init__(self, args):
         self.args = args
 
@@ -40,8 +42,8 @@ class TrainingSession:
 
     def create_model(self):
         self.model = BertForSequenceClassification.from_pretrained(
-            pretrained_model_name_or_path=self.args.model_name,
-            num_labels=self.args.output_classes,
+            pretrained_model_name_or_path=self.MODEL_NAME,
+            num_labels=1,
             output_attentions=False,
             output_hidden_states=False,
         )

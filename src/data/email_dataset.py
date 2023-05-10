@@ -4,10 +4,12 @@ import pandas as pd
 
 
 class EmailDataset(Dataset):
+    TOKENIZER_NAME = "bert-base-uncased"
+
     def __init__(self, csv_path, max_len=512):
         self.df = self._csv_to_df(csv_path)
         self.tokenizer = BertTokenizer.from_pretrained(
-            "bert-base-uncased", do_lower_case=True
+            self.TOKENIZER_NAME, do_lower_case=True
         )
         self.max_len = max_len
 
